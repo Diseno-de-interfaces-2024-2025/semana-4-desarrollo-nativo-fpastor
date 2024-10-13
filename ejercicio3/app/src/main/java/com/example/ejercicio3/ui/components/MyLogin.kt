@@ -66,6 +66,12 @@ fun MyLogin() {
                 .padding(30.dp)
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Image(
+                        painter = painterResource(id = R.drawable.avatar),
+                        contentDescription = "Descripción de la imagen",
+                        Modifier.padding(bottom = 10.dp)
+                    )
+
                     OutlinedTextField(
                         modifier = Modifier.padding(bottom = 15.dp).fillMaxWidth(),
                         value = username,
