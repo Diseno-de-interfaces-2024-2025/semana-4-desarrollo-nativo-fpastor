@@ -2,29 +2,34 @@ package com.example.ejercicio4.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
@@ -32,14 +37,26 @@ import com.example.ejercicio4.R
 
 @Composable
 fun Screen() {
+    var fieldName by remember { mutableStateOf("") }
+    var fieldEmail by remember { mutableStateOf("") }
+    var fieldAddress by remember { mutableStateOf("") }
+    var fieldCountry by remember { mutableStateOf("") }
+    var name by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var address by remember { mutableStateOf("") }
+    var country by remember { mutableStateOf("") }
+
     Column(
         verticalArrangement = Arrangement.Center,
-        modifier = Modifier.fillMaxSize()
+        //modifier = Modifier.fillMaxSize()
     ) {
 
+        // App title box
         Box(
             contentAlignment = Alignment.Center,
-            modifier = Modifier.fillMaxWidth().padding(96.dp, 32.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(96.dp, 32.dp)
         ) {
             Image(
                 painter = painterResource(id = R.drawable.gc_logo_flag),
@@ -47,75 +64,153 @@ fun Screen() {
             )
         }
 
-        Row(Modifier
-            .horizontalScroll(rememberScrollState())
-            .shadow(elevation = 4.dp, shape = RectangleShape)
-            .background(Color.DarkGray)
-            .padding(16.dp)
-            .zIndex(1f),
-            horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            Bubble(resourceId = R.drawable.playstation, description = "PlayStation")
-            Bubble(resourceId = R.drawable.xbox, description = "Xbox")
+        // Bubbles' row with horizontal scroll
+        Row(
+            Modifier
+                .horizontalScroll(rememberScrollState())
+                .shadow(elevation = 16.dp, shape = RectangleShape)
+                .background(Color.DarkGray)
+                .padding(16.dp)
+                .zIndex(1f),
+            horizontalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
             Bubble(resourceId = R.drawable.atari, description = "ATARI")
+            Bubble(resourceId = R.drawable.atlus, description = "ATLUS")
             Bubble(resourceId = R.drawable.neogeo, description = "NeoGeo")
             Bubble(resourceId = R.drawable.nintendo_switch, description = "Nintendo Switch")
             Bubble(resourceId = R.drawable.playstation, description = "PlayStation")
+            Bubble(resourceId = R.drawable.rockstar, description = "RockStar Games")
             Bubble(resourceId = R.drawable.xbox, description = "Xbox")
-            Bubble(resourceId = R.drawable.atari, description = "ATARI")
-            Bubble(resourceId = R.drawable.neogeo, description = "NeoGeo")
-            Bubble(resourceId = R.drawable.nintendo_switch, description = "Nintendo Switch")
         }
 
-        Row(Modifier
-            .fillMaxSize()
-            .weight(0.75f)
-            .background(Color.White)) {
-            Box(Modifier
-                .fillMaxSize()
-                .weight(1f)
-                .padding(16.dp)) {
-                Box(Modifier
-                    .fillMaxSize()
-                    .clip(RoundedCornerShape(20.dp))
-                    .border(1.dp, Color.hsl(229f, 0.43f, 0.67f))
-                    .background(Color.hsl(229f, 0.59f, 0.76f))
-                    .padding(16.dp)) {
-                    Text(text = "Hola", color = Color.White)
+        // Row for game description, with photo and text with scroll
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .height(300.dp)
+                .background(Color.White)
+        ) {
+            Box(
+                Modifier
+                    .weight(1f)
+                    .padding(8.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.boxart),
+                    contentDescription = "Coverart",
+                )
+            }
+            Box(
+                Modifier
+                    .weight(1f)
+                    .padding(0.dp, 8.dp, 8.dp, 8.dp)
+                    .verticalScroll(rememberScrollState())
+            ) {
+                Text(
+                    text = "Lorem fistrum diodenoo ese pedazo de llevame al sircoo ese que llega" +
+                            "no te digo trigo por no llamarte Rodrigor de la pradera diodeno a wan" +
+                            "no te digo trigo por no llamarte Rodrigor. Qué dise usteer diodenoo" +
+                            "está la cosa muy malar hasta luego Lucas pupita. Ese hombree de la" +
+                            "pradera condemor llevame al sircoo se calle ustée tiene musho" +
+                            "peligro pecador sexuarl amatomaa a peich. Te voy a borrar el cerito" +
+                            "se calle ustée ese pedazo de llevame al sircoo sexuarl. Amatomaa" +
+                            "apetecan amatomaa jarl está la cosa muy malar." +
+                            "Pupita amatomaa a wan papaar papaar de la pradera sexuarl sexuarl" +
+                            "mamaar quietooor va usté muy cargadoo.",
+                    color = Color.DarkGray,
+                    fontSize = 13.sp,
+                    lineHeight = 16.sp
+                )
+            }
+        }
+
+        // Row for "Form" title
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .background(Color.White)
+                .padding(8.dp),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text("Formulario", fontSize = 24.sp, fontWeight = FontWeight(800))
+        }
+
+        // Row for form with a LazyVerticalGrid
+        Row(Modifier.background(Color.White)) {
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2),
+                contentPadding = PaddingValues(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                item {
+                    OutlinedTextField(
+                        value = fieldName,
+                        onValueChange = { fieldName = it },
+                        label = { Text("Name") },
+                        singleLine = true,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+                item {
+                    Text(text = name)
+                }
+                item {
+                    OutlinedTextField(
+                        value = fieldEmail,
+                        onValueChange = { fieldEmail = it },
+                        label = { Text("Email") },
+                        singleLine = true,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+                item {
+                    Text(text = email)
+                }
+                item {
+                    OutlinedTextField(
+                        value = fieldAddress,
+                        onValueChange = { fieldAddress = it },
+                        label = { Text("Address") },
+                        singleLine = true,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+                item {
+
+                    Text(text = address)
+                }
+                item {
+                    OutlinedTextField(
+                        value = fieldCountry,
+                        onValueChange = { fieldCountry = it },
+                        label = { Text("Country") },
+                        singleLine = true,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+                item {
+                    Text(text = country)
                 }
             }
-            Box(Modifier
-                .fillMaxSize()
-                .weight(1f)
-                .padding(0.dp, 16.dp, 16.dp, 16.dp)
-                .verticalScroll(rememberScrollState())
-            ) { Text(
-                text = "Lorem fistrum diodenoo ese pedazo de llevame al sircoo ese que llega" +
-                        "no te digo trigo por no llamarte Rodrigor de la pradera diodeno a wan" +
-                        "no te digo trigo por no llamarte Rodrigor. Qué dise usteer diodenoo" +
-                        "está la cosa muy malar hasta luego Lucas pupita. Ese hombree de la" +
-                        "pradera condemor llevame al sircoo se calle ustée tiene musho" +
-                        "peligro pecador sexuarl amatomaa a peich. Te voy a borrar el cerito" +
-                        "se calle ustée ese pedazo de llevame al sircoo sexuarl. Amatomaa" +
-                        "apetecan amatomaa jarl está la cosa muy malar." +
-                        "Pupita amatomaa a wan papaar papaar de la pradera sexuarl sexuarl" +
-                        "mamaar quietooor va usté muy cargadoo.",
-                color = Color.DarkGray,
-                fontSize = 14.sp,
-                lineHeight = 18.sp)
-            }
         }
 
-        Row(Modifier.fillMaxSize().weight(1.25f).background(Color.White)) {
-            Box(Modifier.fillMaxSize().background(Color.LightGray).weight(1f).padding(10.dp)) {
-                Text(text = "GAME COLLECTOR")
-            }
-
-            Spacer(Modifier.width(10.dp))
-
-            Box(Modifier.fillMaxSize().weight(1f).padding(10.dp)) {
-                Text(text = "GAME COLLECTOR")
+        // Row for the update button
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .background(Color.White)
+                .padding(8.dp),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Button(onClick = {
+                name = fieldName
+                email = fieldEmail
+                address = fieldAddress
+                country = fieldCountry
+            }) {
+                Text(text = "Actualizar")
             }
         }
-
     }
 }

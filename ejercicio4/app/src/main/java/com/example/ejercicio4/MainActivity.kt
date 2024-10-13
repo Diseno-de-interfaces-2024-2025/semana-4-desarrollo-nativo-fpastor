@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Box(Modifier.background(Color.hsl(45f, 1f, 0.5f)).fillMaxSize()) {
                         Box(Modifier.padding(innerPadding).fillMaxWidth()) {
-                            Screen();
+                            Screen()
                         }
                     }
                 }
