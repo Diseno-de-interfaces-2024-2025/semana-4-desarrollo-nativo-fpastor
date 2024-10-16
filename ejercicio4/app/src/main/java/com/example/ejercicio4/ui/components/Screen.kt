@@ -6,13 +6,11 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -135,81 +133,70 @@ fun Screen() {
             Text("Formulario", fontSize = 24.sp, fontWeight = FontWeight(800))
         }
 
-        // Row for form with a LazyVerticalGrid
-        Row(Modifier.background(Color.White)) {
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                contentPadding = PaddingValues(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                item {
-                    OutlinedTextField(
-                        value = fieldName,
-                        onValueChange = { fieldName = it },
-                        label = { Text("Name") },
-                        singleLine = true,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-                item {
+        // Column for the form
+        Column(modifier = Modifier.fillMaxSize().background(Color.White).padding(10.dp)) {
+            Row(Modifier.background(Color.White).fillMaxWidth().weight(1f)) {
+                OutlinedTextField(
+                    value = fieldName,
+                    onValueChange = { fieldName = it },
+                    label = { Text("Name") },
+                    singleLine = true,
+                    modifier = Modifier.weight(1f)
+                )
+                Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize().weight(1f)) {
                     Text(text = name)
                 }
-                item {
-                    OutlinedTextField(
-                        value = fieldEmail,
-                        onValueChange = { fieldEmail = it },
-                        label = { Text("Email") },
-                        singleLine = true,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-                item {
+            }
+            Row(Modifier.background(Color.White).fillMaxWidth().weight(1f)) {
+                OutlinedTextField(
+                    value = fieldEmail,
+                    onValueChange = { fieldEmail = it },
+                    label = { Text("Email") },
+                    singleLine = true,
+                    modifier = Modifier.weight(1f)
+                )
+                Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize().weight(1f)) {
                     Text(text = email)
                 }
-                item {
-                    OutlinedTextField(
-                        value = fieldAddress,
-                        onValueChange = { fieldAddress = it },
-                        label = { Text("Address") },
-                        singleLine = true,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-                item {
-
+            }
+            Row(Modifier.background(Color.White).fillMaxWidth().weight(1f)) {
+                OutlinedTextField(
+                    value = fieldAddress,
+                    onValueChange = { fieldAddress = it },
+                    label = { Text("Address") },
+                    singleLine = true,
+                    modifier = Modifier.weight(1f)
+                )
+                Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize().weight(1f)) {
                     Text(text = address)
                 }
-                item {
-                    OutlinedTextField(
-                        value = fieldCountry,
-                        onValueChange = { fieldCountry = it },
-                        label = { Text("Country") },
-                        singleLine = true,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-                item {
+            }
+            Row(Modifier.background(Color.White).fillMaxWidth().weight(1f)) {
+                OutlinedTextField(
+                    value = fieldCountry,
+                    onValueChange = { fieldCountry = it },
+                    label = { Text("Country") },
+                    singleLine = true,
+                    modifier = Modifier.weight(1f)
+                )
+                Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize().weight(1f)) {
                     Text(text = country)
                 }
             }
-        }
-
-        // Row for the update button
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .background(Color.White)
-                .padding(8.dp),
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Button(onClick = {
-                name = fieldName
-                email = fieldEmail
-                address = fieldAddress
-                country = fieldCountry
-            }) {
-                Text(text = "Actualizar")
+            Row(
+                Modifier.fillMaxWidth()
+                    .background(Color.White)
+                    .padding(8.dp),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Button(onClick = {
+                    name = fieldName
+                    email = fieldEmail
+                    address = fieldAddress
+                    country = fieldCountry
+                }) {
+                    Text(text = "Actualizar")
+                }
             }
         }
     }
